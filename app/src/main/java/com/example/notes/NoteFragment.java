@@ -60,8 +60,6 @@ public class NoteFragment extends Fragment {
         super.onSaveInstanceState(outState);
     }
 
-
-    // activity создана, можно к ней обращаться. Выполним начальные действия
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -92,12 +90,14 @@ public class NoteFragment extends Fragment {
     }
 
     private void showLandNoteDetails(Note currentNote) {
-        com.example.notes.NoteExpandedFragment noteExpandedFragment = com.example.notes.NoteExpandedFragment.newInstance(currentNote);
-        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.note_expanded, noteExpandedFragment);  // замена фрагмента
-        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        fragmentTransaction.commit();
+        if (currentNote != null) {
+            com.example.notes.NoteExpandedFragment noteExpandedFragment = com.example.notes.NoteExpandedFragment.newInstance(currentNote);
+            FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.note_expanded, noteExpandedFragment);  // замена фрагмента
+            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+            fragmentTransaction.commit();
+        }
     }
 
 
