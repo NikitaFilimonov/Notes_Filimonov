@@ -16,6 +16,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import java.util.ArrayList;
+import java.util.zip.Inflater;
 
 public class NoteFragment extends Fragment {
 
@@ -35,16 +36,19 @@ public class NoteFragment extends Fragment {
         String[] names = getResources().getStringArray(R.array.note_example_names);
         String[] texts = getResources().getStringArray(R.array.note_example_texts);
         ArrayList<Note> notes = new ArrayList<>();
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        params.setMargins(15, 15, 15, 15);
+//        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+//        params.setMargins(15, 15, 15, 15);
 
         for (int i = 0; i < names.length; i++) {
             Note tmpNote = new Note(names[i], texts[i], null);
             notes.add(tmpNote);
-            TextView tv = new TextView(getContext());
+//            TextView tv = new TextView(getContext());
+            LayoutInflater inflater = getLayoutInflater();
+            View layout = inflater.inflate(R.layout.item_note_view, layoutView, false);
+            TextView tv = layout.findViewById(R.id.textView);
             tv.setText(notes.get(i).getName());
-            tv.setLayoutParams(params);
-            layoutView.addView(tv);
+//            tv.setLayoutParams(params);
+            layoutView.addView(layout);
 
             tv.setOnClickListener(v -> {
                 currentNote = tmpNote;
