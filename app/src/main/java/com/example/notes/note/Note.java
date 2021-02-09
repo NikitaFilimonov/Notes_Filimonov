@@ -1,46 +1,50 @@
-package com.example.notes;
+package com.example.notes.note;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.Date;
 
 public class Note implements Parcelable {
     private String name;
     private String text;
+    private boolean like;
     private Date dateCreated;
 
-    public Note(String name, String text, Date dateCreated) {
+    public Note(String name, String text, boolean like, Date dateCreated) {
         this.name = name;
         this.text = text;
-        if (dateCreated != null) {
-            this.dateCreated = dateCreated;
-        } else {
-            this.dateCreated = new Date();
-        }
+        this.like = like;
+        this.dateCreated = dateCreated;
+//        if (dateCreated != null) {
+//            this.dateCreated = dateCreated;
+//        } else {
+//            this.dateCreated = new Date();
+//        }
     }
 
     protected Note(Parcel in) {
         name = in.readString();
         text = in.readString();
+        like = in.readByte() != 0;
         dateCreated = new Date(in.readLong());
     }
 
     public static final Creator<Note> CREATOR = new Creator<Note>() {
         @Override
-        public com.example.notes.Note createFromParcel(Parcel in) {
-            return new com.example.notes.Note(in);
+        public Note createFromParcel(Parcel in) {
+            return new Note(in);
         }
 
         @Override
-        public com.example.notes.Note[] newArray(int size) {
-            return new com.example.notes.Note[size];
+        public Note[] newArray(int size) {
+            return new Note[size];
         }
     };
 
-    public String getName() {
-        return name;
-    }
+    public String getName() { return name; }
 
     public void setName(String name) {
         this.name = name;
@@ -62,6 +66,10 @@ public class Note implements Parcelable {
         this.dateCreated = dateCreated;
     }
 
+    public boolean isLike() {
+        return like;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -71,6 +79,11 @@ public class Note implements Parcelable {
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(getName());
         parcel.writeString(getText());
+        parcel.writeByte((byte) (like ? 1 : 0));
         parcel.writeLong(getDateCreated().getTime());
+    }
+
+    public Date getDateCrated() {
+        return dateCreated;
     }
 }

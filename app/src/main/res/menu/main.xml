@@ -10,6 +10,18 @@
         app:showAsAction="ifRoom" />
 
     <item
+        android:id="@+id/action_update"
+        android:orderInCategory="10"
+        android:title="@string/update"/>
+
+    <item
+        android:id="@+id/action_add"
+        android:icon="@android:drawable/ic_menu_add"
+        android:orderInCategory="10"
+        android:title="@string/add"
+        app:showAsAction="always" />
+
+    <item
         android:id="@+id/m_action_settings"
         android:title="@string/settings"
         app:showAsAction="never" />
@@ -18,4 +30,16 @@
         android:id="@+id/m_action_about"
         android:title="@string/about"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_clear"
+        android:icon="@android:drawable/ic_notification_clear_all"
+        android:orderInCategory="10"
+        android:title="@string/clear"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_delete"
+        android:orderInCategory="20"
+        android:title="@string/delete"/>
 </menu>

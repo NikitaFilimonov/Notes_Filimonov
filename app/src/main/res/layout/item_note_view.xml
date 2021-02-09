@@ -10,4 +10,18 @@
         android:text="item"
         android:textSize="@dimen/text_size" />
 
+    <CheckBox
+        android:id="@+id/like"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="end"
+        android:text="TextView" />
+
 </FrameLayout>

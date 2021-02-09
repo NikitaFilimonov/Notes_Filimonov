@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.notes.note.Note;
+
 public class NoteExpandedFragment extends Fragment {
 
     public static final String ARG_NOTE = "agr_note";

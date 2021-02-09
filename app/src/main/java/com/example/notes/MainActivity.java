@@ -17,6 +17,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.notes.observe.Publisher;
+import com.example.notes.ui.SocialNetworkFragment;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -24,11 +26,17 @@ public class MainActivity extends AppCompatActivity {
     private String ABOUT_DIALOG_FRAGMENT_TAG = "about_dialog_fragment_tag";
     private DialogFragment aboutDialogFragment;
 
+    private Navigation navigation;
+    private Publisher publisher = new Publisher();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        navigation = new Navigation(getSupportFragmentManager());
         initView();
+        getNavigation().addFragment(SocialNetworkFragment.newInstance(), false);
+//        initToolbar();
     }
 
     private void initView() {
@@ -45,6 +53,20 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         return (toolbar);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
+    public Navigation getNavigation() {
+        return navigation;
+    }
+
+    public Publisher getPublisher() {
+        return publisher;
     }
 
     private void initDrawer(Toolbar toolbar) {
