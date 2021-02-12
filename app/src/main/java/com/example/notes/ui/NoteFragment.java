@@ -23,9 +23,7 @@ import java.util.Date;
 public class NoteFragment extends Fragment {
 
     private boolean isLandscape;
-    //    public static final String CURRENT_NOTE = "current_note_idx";
     private Note currentNote;
-    //    private ArrayList<Note> notes;
     private Publisher publisher;
     private static final String ARG_NOTE = "Param_Note";
 
@@ -33,7 +31,6 @@ public class NoteFragment extends Fragment {
     private TextInputEditText text;
     private DatePicker datePicker;
 
-    // Для релактирования данных
     public static NoteFragment newInstance(Note note) {
         NoteFragment fragment = new NoteFragment();
         Bundle args = new Bundle();
@@ -73,7 +70,6 @@ public class NoteFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_note_expanded, container, false);
         initView(view);
-        // если cardData пустая, то это добавление
         if (currentNote != null) {
             populateView();
         }
@@ -92,23 +88,24 @@ public class NoteFragment extends Fragment {
         publisher.notifySingle(currentNote);
     }
 
-//    @Override
-//    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-//        super.onViewCreated(view, savedInstanceState);
-//        initView(view);
-//    }
-
     private Note collectNote() {
         String name = this.name.getText().toString();
         String text = this.text.getText().toString();
         Date date = getDateFromDatePicker();
-        boolean like;
+//        boolean like;
         if (currentNote != null) {
-            like = currentNote.isLike();
+            Note answer;
+            answer = new Note(name, text, currentNote.isLike(), date);
+            answer.setId(currentNote.getId());
+            return answer;
+
+//            like = currentNote.isLike();
         } else {
-            like = false;
+//            like = false;
+            return new Note(name, text,false, date);
+
         }
-        return new Note(name, text, like, date);
+//        return new Note(name, text, like, date);
     }
 
     private Date getDateFromDatePicker() {
@@ -140,43 +137,9 @@ public class NoteFragment extends Fragment {
                 null);
     }
 
-
 }
 
 
-//    private void initNoteList(View view) {
-//        LinearLayout layoutView = (LinearLayout) view;
-//        String[] names = getResources().getStringArray(R.array.names);
-//        String[] texts = getResources().getStringArray(R.array.texts);
-//        ArrayList<Note> notes = new ArrayList<>();
-////        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-////        params.setMargins(15, 15, 15, 15);
-//
-//        for (int i = 0; i < names.length; i++) {
-//            Note tmpNote = new Note(names[i], texts[i], false, null);
-//            notes.add(tmpNote);
-////            TextView tv = new TextView(getContext());
-//            LayoutInflater inflater = getLayoutInflater();
-//            View layout = inflater.inflate(R.layout.item_note_view, layoutView, false);
-//            TextView tv = layout.findViewById(R.id.textView);
-//            tv.setText(notes.get(i).getName());
-////            tv.setLayoutParams(params);
-//            layoutView.addView(layout);
-//
-//            tv.setOnClickListener(v -> {
-//                currentNote = tmpNote;
-//                showNoteDetails(currentNote);
-//
-//            });
-//        }
-//    }
-//
-//    @Override
-//    public void onSaveInstanceState(@NonNull Bundle outState) {
-//        outState.putParcelable(CURRENT_NOTE, currentNote);
-//        super.onSaveInstanceState(outState);
-//    }
-//
 //    @Override
 //    public void onActivityCreated(Bundle savedInstanceState) {
 //        super.onActivityCreated(savedInstanceState);

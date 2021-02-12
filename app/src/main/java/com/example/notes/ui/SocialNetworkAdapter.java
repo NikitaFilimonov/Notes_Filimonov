@@ -22,15 +22,20 @@ public class SocialNetworkAdapter
         extends RecyclerView.Adapter<SocialNetworkAdapter.ViewHolder> {
 
     private final static String TAG = "SocialNetworkAdapter";
-    private final NotesSource notesSource;
+    private NotesSource notesSource;
     private final Fragment fragment;
     private AdapterView.OnItemClickListener itemClickListener;  // Слушатель будет устанавливаться извне
     private int menuPosition;
 
-    public SocialNetworkAdapter(NotesSource notesSource, Fragment fragment) {
-        this.notesSource = notesSource;
+    public SocialNetworkAdapter(Fragment fragment) {
         this.fragment = fragment;
     }
+
+    public void setNotesSource(NotesSource notesSource){
+        this.notesSource = notesSource;
+        notifyDataSetChanged();
+    }
+
 
     @NonNull
     @Override
@@ -77,30 +82,31 @@ public class SocialNetworkAdapter
 
         public ViewHolder(@NonNull final View itemView) {
             super(itemView);
-            name = itemView.findViewById(R.id.name);
-            text = itemView.findViewById(R.id.text);
+            name = itemView.findViewById(R.id.tv_name);
+            text = itemView.findViewById(R.id.tv_text);
             like = itemView.findViewById(R.id.like);
-            date = itemView.findViewById(R.id.date);
+            date = itemView.findViewById(R.id.tv_date_created);
 
             registerContextMenu(itemView);
         }
-            private void registerContextMenu (@NonNull View itemView){
-                if (fragment != null) {
-                    itemView.setOnLongClickListener(v -> {
-                        menuPosition = getLayoutPosition();
-                        return false;
-                    });
-                    fragment.registerForContextMenu(itemView);
-                }
-            }
 
-            public void setData (Note note){
-                name.setText(note.getName());
-                text.setText(note.getText());
-                like.setChecked(note.isLike());
-                date.setText(new SimpleDateFormat("dd-MM-yy").format(note.getDateCrated()));
+        private void registerContextMenu(@NonNull View itemView) {
+            if (fragment != null) {
+                itemView.setOnLongClickListener(v -> {
+                    menuPosition = getLayoutPosition();
+                    return false;
+                });
+                fragment.registerForContextMenu(itemView);
             }
         }
+
+        public void setData(Note note) {
+            name.setText(note.getName());
+            text.setText(note.getText());
+            like.setChecked(note.isLike());
+            date.setText(new SimpleDateFormat("dd-MM-yy").format(note.getDateCrated()));
+        }
     }
+}
 
 

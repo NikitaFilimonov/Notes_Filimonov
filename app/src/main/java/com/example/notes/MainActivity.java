@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
         navigation = new Navigation(getSupportFragmentManager());
         initView();
         getNavigation().addFragment(SocialNetworkFragment.newInstance(), false);
-//        initToolbar();
     }
 
     private void initView() {
@@ -135,5 +134,4 @@ public class MainActivity extends AppCompatActivity {
             return false;
         });
     }
-
 }

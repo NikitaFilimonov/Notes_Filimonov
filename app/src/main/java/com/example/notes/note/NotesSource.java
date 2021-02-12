@@ -1,6 +1,7 @@
 package com.example.notes.note;
 
 public interface NotesSource {
+    NotesSource init(NotesSourceResponse notesSourceResponse);
     Note getNote(int position);
     int size();
     void deleteNote(int position);

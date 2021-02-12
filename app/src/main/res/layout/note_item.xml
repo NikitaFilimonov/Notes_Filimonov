@@ -43,4 +43,10 @@
         android:layout_marginBottom="@dimen/margin_bottom"
         android:text="@string/note_text_placeholder" />
 
+    <CheckBox
+        android:id="@+id/like"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+
 </LinearLayout>

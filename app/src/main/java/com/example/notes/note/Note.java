@@ -8,6 +8,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import java.util.Date;
 
 public class Note implements Parcelable {
+    private String id;
     private String name;
     private String text;
     private boolean like;
@@ -18,11 +19,6 @@ public class Note implements Parcelable {
         this.text = text;
         this.like = like;
         this.dateCreated = dateCreated;
-//        if (dateCreated != null) {
-//            this.dateCreated = dateCreated;
-//        } else {
-//            this.dateCreated = new Date();
-//        }
     }
 
     protected Note(Parcel in) {
@@ -44,7 +40,9 @@ public class Note implements Parcelable {
         }
     };
 
-    public String getName() { return name; }
+    public String getName() {
+        return name;
+    }
 
     public void setName(String name) {
         this.name = name;
@@ -85,5 +83,13 @@ public class Note implements Parcelable {
 
     public Date getDateCrated() {
         return dateCreated;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
